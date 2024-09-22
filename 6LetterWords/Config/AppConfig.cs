@@ -2,15 +2,8 @@
 {
     internal class AppConfig
     {
-        public string FileInputPath { get; }
-        public string FileOutputPath { get; }
-        public int WordLength { get; }
-
-        public AppConfig(string fileInputPath, string fileOutputPath, int wordLength)
-        {
-            FileInputPath = fileInputPath;
-            FileOutputPath = fileOutputPath;
-            WordLength = wordLength;
-        }
+        public required string InputPath { get; set; }
+        public required string OutputPath { get; set; }
+        public int WordLength { get; set; }
     }
 }

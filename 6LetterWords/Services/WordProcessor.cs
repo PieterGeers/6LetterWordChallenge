@@ -1,4 +1,5 @@
-﻿using _6LetterWords.Config;
+﻿using Microsoft.Extensions.Options;
+using _6LetterWords.Config;
 using _6LetterWords.Dal.Interfaces;
 using _6LetterWords.Services.Models;
 
@@ -9,15 +10,16 @@ namespace _6LetterWords.Services
         private readonly IDataReaderWriter<IEnumerable<string>> _dataReaderWriter;
         private readonly AppConfig _appConfig;
 
-        public WordProcessor(IDataReaderWriter<IEnumerable<string>> dataReaderWriter, AppConfig appConfig)
+        public WordProcessor(IDataReaderWriter<IEnumerable<string>> dataReaderWriter,
+            IOptions<AppConfig> appConfig)
         {
             _dataReaderWriter = dataReaderWriter;
-            _appConfig = appConfig;
+            _appConfig = appConfig.Value;
         }
 
         public async Task ProcessWordsAsync()
         {
-            var data = (await _dataReaderWriter.ReadAsync(_appConfig.FileInputPath)).Distinct();
+            var data = (await _dataReaderWriter.ReadAsync(_appConfig.InputPath)).Distinct();
 
             var completeWords = data.Where(x => x.Length == _appConfig.WordLength).Select(x => new Word(x));
             HashSet<string> wordSections = new HashSet<string>(data.Where(x => x.Length < _appConfig.WordLength));
@@ -28,7 +30,7 @@ namespace _6LetterWords.Services
                 combinations.AddRange(word.GetAllPossibleCombination(wordSections));
             }
 
-            await _dataReaderWriter.WriteAsync(_appConfig.FileOutputPath, combinations);
+            await _dataReaderWriter.WriteAsync(_appConfig.OutputPath, combinations);
         }
     }
 }
