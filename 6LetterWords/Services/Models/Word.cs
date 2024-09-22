@@ -9,12 +9,9 @@
             _word = word;
         }
 
-        public List<string> GetAllPossibleCombination(IEnumerable<string> allPossibleSections)
+        public List<string> GetAllPossibleCombination(HashSet<string> availableSections)
         {
             var possibleCombination = GenerateAllPossibleCombinations();
-
-            HashSet<string> distinctSections = new HashSet<string>(possibleCombination.SelectMany(x => x).Distinct());
-            HashSet<string> availableSections = new HashSet<string>(allPossibleSections.Where(distinctSections.Contains));
 
             List<string> result = new List<string>();
             foreach (var combination in possibleCombination)
