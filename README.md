@@ -1,23 +1,30 @@
 # 6 letter words
-There's a file in the root of the repository, input.txt, that contains words of varying lengths (1 to 6 characters).
+The goal of this repo was to create an application that could evaluate a file containing `1` through `N` letter words and find all possible combinations of those words that would create a `N` letter word which can be found in the file.
 
-Your objective is to show all combinations of those words that together form a word of 6 characters. That combination must also be present in input.txt
 E.g.:  
-<code>
-foobar  
-fo  
-obar  
-</code>
+<code>foobar</code>
+<code>fo</code>
+<code>obar</code>
 
-should result in the ouput:  
-<code>
-fo+obar=foobar
-</code>
+The result is outputted to an file in the format: <code>fo+obar=foobar</code>
 
-You can start by only supporting combinations of two words and improve the algorithm at the end of the exercise to support any combinations.
+## Usage
+In the root of the project there is an appsettings.json file.
 
-Treat this exercise as if you were writing production code; think unit tests, SOLID, clean code and avoid primitive obsession. Be mindful of changing requirements like a different maximum combination length, or a different source of the input data.
+```json
+{
+  "AppConfig": {
+    "InputPath": "",
+    "OutputPath": "",
+    "WordLength": 6
+  }
+}
+```
 
-The solution must be stored in a git repo. After the repo is cloned, the application should be able to run with one command / script.
+<code>InputPath</code>: This is the absolute path to the input file.
 
-Don't spend too much time on this.
+<code>OutputPath</code>: This is the absolute path to the output file.
+
+<code>WordLength</code>: This is the length of the 'complete' words in the input file.
+
+Update the <code>appsettings.json</code> and ensure <code>InputPath</code> and <code>OutputPath</code> direct to the appropriate file.
