@@ -46,7 +46,7 @@ namespace _6LetterWords.Tests
         }
 
         [Fact]
-        public void GetAllPossibleCombinations_WhenSectionContainsWord()
+        public void GetAllPossibleCombinations_WhenExactSectionMatch()
         {
             var word = new Word("letter");
             var sections = new HashSet<string> { "letter" };
